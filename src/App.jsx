@@ -142,6 +142,7 @@ export default function App() {
   const totalLicense2 = chartData.reduce((sum, r) => sum + r.tier2, 0);
   const totalUnitsAll = chartData.reduce((sum, r) => sum + r.totalUnits, 0);
   const lastLicense1 = chartData[chartData.length - 1]?.tier1 || 0;
+  const lastLicense2 = chartData[chartData.length - 1]?.tier2 || 0;
 
   // Export
   const handleExportAll = () => {
@@ -254,34 +255,39 @@ export default function App() {
       </CollapsibleSection>
 
       <CollapsibleSection title="Lizenz-KPIs">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="p-4 bg-gray-100 rounded-xl text-center">
-            <h3 className="font-medium">Gesamt Erlös Lizenz 1</h3>
-            <p className="mt-2 text-2xl font-semibold">{fmt(totalLicense1)}</p>
-            <p className="text-sm text-gray-500">Summe Lizenz 1-Erlöse</p>
-          </div>
-          <div className="p-4 bg-gray-100 rounded-xl text-center">
-            <h3 className="font-medium">Ø monatlicher Erlös Lizenz 1</h3>
-            <p className="mt-2 text-2xl font-semibold">{fmt(totalLicense1 / months)}</p>
-            <p className="text-sm text-gray-500">Durchschnitt pro Monat</p>
-          </div>
-          <div className="p-4 bg-gray-100 rounded-xl text-center">
-            <h3 className="font-medium">Erlös Lizenz 1 (letzter Monat)</h3>
-            <p className="mt-2 text-2xl font-semibold">{fmt(lastLicense1)}</p>
-            <p className="text-sm text-gray-500">Im letzten Monat der Planung</p>
-          </div>
-          <div className="p-4 bg-gray-100 rounded-xl text-center">
-            <h3 className="font-medium">Gesamt Erlös Lizenz 2</h3>
-            <p className="mt-2 text-2xl font-semibold">{fmt(totalLicense2)}</p>
-            <p className="text-sm text-gray-500">Summe Lizenz 2-Erlöse</p>
-          </div>
-          <div className="p-4 bg-gray-100 rounded-xl text-center">
-            <h3 className="font-medium">Ø monatlicher Erlös Lizenz 2</h3>
-            <p className="mt-2 text-2xl font-semibold">{fmt(totalLicense2 / months)}</p>
-            <p className="text-sm text-gray-500">Durchschnitt pro Monat</p>
-          </div>
-        </div>
-      </CollapsibleSection>
+  <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-6">
+    <div className="p-4 bg-gray-100 rounded-xl text-center">
+      <h3 className="font-medium">Gesamt Erlös Lizenz 1</h3>
+      <p className="mt-2 text-2xl font-semibold">{fmt(totalLicense1)}</p>
+      <p className="text-sm text-gray-500">Summe Lizenz 1-Erlöse</p>
+    </div>
+    <div className="p-4 bg-gray-100 rounded-xl text-center">
+      <h3 className="font-medium">Ø monatlicher Erlös Lizenz 1</h3>
+      <p className="mt-2 text-2xl font-semibold">{fmt(totalLicense1 / months)}</p>
+      <p className="text-sm text-gray-500">Durchschnitt pro Monat</p>
+    </div>
+    <div className="p-4 bg-gray-100 rounded-xl text-center">
+      <h3 className="font-medium">Erlös Lizenz 1 (letzter Monat)</h3>
+      <p className="mt-2 text-2xl font-semibold">{fmt(lastLicense1)}</p>
+      <p className="text-sm text-gray-500">Im letzten Monat der Planung</p>
+    </div>
+    <div className="p-4 bg-gray-100 rounded-xl text-center">
+      <h3 className="font-medium">Gesamt Erlös Lizenz 2</h3>
+      <p className="mt-2 text-2xl font-semibold">{fmt(totalLicense2)}</p>
+      <p className="text-sm text-gray-500">Summe Lizenz 2-Erlöse</p>
+    </div>
+    <div className="p-4 bg-gray-100 rounded-xl text-center">
+      <h3 className="font-medium">Ø monatlicher Erlös Lizenz 2</h3>
+      <p className="mt-2 text-2xl font-semibold">{fmt(totalLicense2 / months)}</p>
+      <p className="text-sm text-gray-500">Durchschnitt pro Monat</p>
+    </div>
+    <div className="p-4 bg-gray-100 rounded-xl text-center">
+      <h3 className="font-medium">Erlös Lizenz 2 (letzter Monat)</h3>
+      <p className="mt-2 text-2xl font-semibold">{fmt(lastLicense2)}</p>
+      <p className="text-sm text-gray-500">Im letzten Monat der Planung</p>
+    </div>
+  </div>
+</CollapsibleSection>
 
       <CollapsibleSection title="Einnahmen & Marge">
         <LicenseChart

@@ -82,6 +82,17 @@ let activeCustomersInLastMonth = 0;
 for (let cohort = 0; cohort <= lastMonthIndex; cohort++) {
   const age = lastMonthIndex - cohort;
 
+  let isActive = age === 0;
+  if (!isActive && reorderCycle > 0 && age >= reorderCycle && age % reorderCycle === 0) {
+    isActive = true;
+  }
+
+  if (isActive) {
+    activeCustomersInLastMonth += newPartnersPerMonth[cohort];
+  }
+}
+
+
   // Hat Nachbestell-Zyklen?
   let isActive = age === 0; // im Startmonat auf jeden Fall aktiv
   if (!isActive && reorderCycle > 0 && age >= reorderCycle && age % reorderCycle === 0) {

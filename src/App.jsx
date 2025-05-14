@@ -156,18 +156,34 @@ export default function App() {
     const exportPayload = {
       inputs: data,
       kpis: {
-        totalNew,
-        reorders,
-        avgUnitsFirstYear: Number(avgUnitsFirstYear.toFixed(2)),
-        avgRevenueFirstYear: Number(avgRevenueFirstYear.toFixed(2)),
-        totalUnitsAll,
-        avgUnitsPerMonth: Number((totalUnitsAll / months).toFixed(2)),
-        totalLicense1,
-        avgLicense1PerMonth: Number((totalLicense1 / months).toFixed(2)),
-        totalLicense2,
-        avgLicense2PerMonth: Number((totalLicense2 / months).toFixed(2)),
-        lastLicense1Month: Number(lastLicense1.toFixed(2))
-      },
+  totalNew,
+  reorders,
+  avgUnitsFirstYear: Number(avgUnitsFirstYear.toFixed(2)),
+  avgRevenueFirstYear: Number(avgRevenueFirstYear.toFixed(2)),
+  totalUnitsAll,
+  avgUnitsPerMonth: Number((totalUnitsAll / months).toFixed(2)),
+
+  // Lizenz 1
+  totalLicense1: Number(totalLicense1.toFixed(2)),
+  avgLicense1PerMonth: Number((totalLicense1 / months).toFixed(2)),
+  lastLicense1Month: Number(lastLicense1.toFixed(2)),
+
+  // Lizenz 2
+  totalLicense2: Number(totalLicense2.toFixed(2)),
+  avgLicense2PerMonth: Number((totalLicense2 / months).toFixed(2)),
+  lastLicense2Month: Number(lastLicense2.toFixed(2)),
+
+  // Vertriebskosten
+  totalSalesCost: Number(totalSalesCost.toFixed(2)),
+  avgSalesCostPerMonth: Number(avgSalesCostPerMonth.toFixed(2)),
+  lastSalesCost: Number(lastSalesCost.toFixed(2)),
+
+  // Logistikkosten
+  totalLogisticsCost: Number(totalLogisticsCost.toFixed(2)),
+  avgLogisticsCostPerMonth: Number(avgLogisticsCostPerMonth.toFixed(2)),
+  lastLogisticsCost: Number(lastLogisticsCost.toFixed(2))
+},
+      
       chartData
     };
     const blob = new Blob([JSON.stringify(exportPayload, null, 2)], { type: 'application/json;charset=utf-8;' });

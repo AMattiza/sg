@@ -76,7 +76,7 @@ export default function App() {
 
   // 1) Chart-Daten
   const chartData = newPartnersPerMonth.map((cSize, i) => {
-    const lastMonthIndex = months - 1;
+const lastMonthIndex = months - 1;
 let activeCustomersInLastMonth = 0;
 
 for (let cohort = 0; cohort <= lastMonthIndex; cohort++) {

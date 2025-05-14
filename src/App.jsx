@@ -73,25 +73,23 @@ export default function App() {
     { length: months },
     (_, j) => newPartners + (increaseInterval > 0 ? Math.floor(j / increaseInterval) * increaseAmount : 0)
   );
-
-  // 1) Chart-Daten
-  const chartData = newPartnersPerMonth.map((cSize, i) => {
-    const lastMonthIndex = months - 1;
+// Berechnung: aktive Kunden im letzten Monat
+const lastMonthIndex = months - 1;
 let activeCustomersInLastMonth = 0;
 
 for (let cohort = 0; cohort <= lastMonthIndex; cohort++) {
   const age = lastMonthIndex - cohort;
-
-  // Hat Nachbestell-Zyklen?
-  let isActive = age === 0; // im Startmonat auf jeden Fall aktiv
+  let isActive = age === 0;
   if (!isActive && reorderCycle > 0 && age >= reorderCycle && age % reorderCycle === 0) {
     isActive = true;
   }
-
   if (isActive) {
     activeCustomersInLastMonth += newPartnersPerMonth[cohort];
   }
 }
+
+  // 1) Chart-Daten
+  const chartData = newPartnersPerMonth.map((cSize, i) => {
 
     const yyyy = startYear + Math.floor((startMonth - 1 + i) / 12);
     const mm = ((startMonth - 1 + i) % 12) + 1;

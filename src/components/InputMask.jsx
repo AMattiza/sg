@@ -50,16 +50,18 @@ export default function InputMask({ data, onChange, sections }) {
     <div className="space-y-6">
       {fields.map((group, gi) => (
         <fieldset key={gi} className="p-4 border rounded-2xl bg-gray-50">
-          <legend className="text-lg font-medium mb-4">{group.section}</legend>
+          <legend className="text-lg font-semibold mb-4 text-gray-800">
+            {group.section}
+          </legend>
           <div className="space-y-4">
             {group.items.map(item => (
               <div
                 key={item.name}
-                className="flex flex-col md:flex-row md:items-center md:space-x-4"
+                className="flex flex-col md:flex-row md:items-center md:space-x-6"
               >
                 <label
                   htmlFor={item.name}
-                  className="text-sm text-gray-700 break-words mb-1 md:mb-0 md:w-1/3 min-w-0"
+                  className="text-sm text-gray-700 md:w-1/3 mb-1 md:mb-0"
                 >
                   {item.label}
                 </label>
@@ -70,7 +72,7 @@ export default function InputMask({ data, onChange, sections }) {
                     type="month"
                     value={data[item.name]}
                     onChange={e => handleChange(item.name, e.target.value)}
-                    className="flex-1 p-1 border rounded"
+                    className="flex-1 border border-gray-300 rounded px-3 py-2"
                   />
                 ) : item.type === 'readOnly' ? (
                   <input
@@ -78,7 +80,7 @@ export default function InputMask({ data, onChange, sections }) {
                     type="number"
                     readOnly
                     value={data[item.name]}
-                    className="flex-1 p-1 bg-gray-100 border rounded"
+                    className="flex-1 bg-gray-100 border border-gray-300 rounded px-3 py-2"
                   />
                 ) : (
                   <div className="flex-1">
@@ -92,7 +94,7 @@ export default function InputMask({ data, onChange, sections }) {
                       onChange={e => handleChange(item.name, e.target.value)}
                       className="w-full"
                     />
-                    <div className="text-sm text-right mt-1">
+                    <div className="text-right text-sm text-gray-600 mt-1">
                       {data[item.name]}
                     </div>
                   </div>

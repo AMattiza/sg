@@ -47,7 +47,7 @@ export default function InputMask({ data, onChange, sections }) {
     : allFields;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 max-w-screen-xl mx-auto px-4">
       {fields.map((group, gi) => (
         <fieldset key={gi} className="p-4 border rounded-2xl bg-gray-50">
           <legend className="text-lg font-semibold mb-4 text-gray-800">
@@ -70,7 +70,7 @@ export default function InputMask({ data, onChange, sections }) {
                     type="month"
                     value={data[item.name]}
                     onChange={e => handleChange(item.name, e.target.value)}
-                    className="border border-gray-300 rounded px-3 py-2"
+                    className="border border-gray-300 rounded px-3 py-2 max-w-[250px]"
                   />
                 ) : item.type === 'readOnly' ? (
                   <input
@@ -78,7 +78,7 @@ export default function InputMask({ data, onChange, sections }) {
                     type="number"
                     readOnly
                     value={data[item.name]}
-                    className="bg-gray-100 border border-gray-300 rounded px-3 py-2"
+                    className="bg-gray-100 border border-gray-300 rounded px-3 py-2 max-w-[250px]"
                   />
                 ) : (
                   <div className="flex items-center gap-2">

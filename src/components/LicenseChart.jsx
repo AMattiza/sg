@@ -22,7 +22,7 @@ const CustomTooltip = ({ active, payload, label }) => {
 
   return (
     <div className="bg-white p-4 border rounded-lg shadow-md">
-      <p className="font-semibold">{label}</p>
+      <p className="font-semibold">{payload?.[0]?.payload?.monthLabel || label}</p>
       <p>Neue Kunden: {fmtInt(d.newCustomers)}</p>
       <p>Nachbesteller: {fmtInt(d.reorderCustomers)}</p>
       <p>Rohertrag Pina: {fmtDec(d.bruttoRohertrag)} €</p>

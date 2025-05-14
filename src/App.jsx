@@ -121,7 +121,23 @@ export default function App() {
 
   // 2) KPI – erstes Jahr
   const totalNew = newPartnersPerMonth.reduce((a, b) => a + b, 0);
-  const reorders = chartData.reduce((sum, r) => sum + r.reorderCustomers, 0);
+  // Neukunden mit mindestens einer Nachbestellung zählen
+let reorderCustomersSet = new Set();
+
+for (let month = 0; month < months; month++) {
+  for (let cohort = 0; cohort < month; cohort++) {
+    const age = month - cohort;
+    if (reorderCycle > 0 && age >= reorderCycle && age % reorderCycle === 0) {
+      const reorderCount = Math.round(newPartnersPerMonth[cohort] * (reorderRate / 100));
+      for (let i = 0; i < reorderCount; i++) {
+        reorderCustomersSet.add(`${cohort}-${i}`);
+      }
+    }
+  }
+}
+
+const reorders = reorderCustomersSet.size;
+
 
   let totalUnitsFirstYear = 0;
   newPartnersPerMonth.forEach(cohortSize => {

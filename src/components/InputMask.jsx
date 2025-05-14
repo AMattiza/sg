@@ -53,15 +53,13 @@ export default function InputMask({ data, onChange, sections }) {
           <legend className="text-lg font-semibold mb-4 text-gray-800">
             {group.section}
           </legend>
-          <div className="space-y-4">
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {group.items.map(item => (
-              <div
-                key={item.name}
-                className="flex flex-col md:flex-row md:items-center md:space-x-6"
-              >
+              <div key={item.name} className="flex flex-col">
                 <label
                   htmlFor={item.name}
-                  className="text-sm text-gray-700 md:w-1/3 mb-1 md:mb-0"
+                  className="text-sm font-medium text-gray-700 mb-1"
                 >
                   {item.label}
                 </label>
@@ -72,7 +70,7 @@ export default function InputMask({ data, onChange, sections }) {
                     type="month"
                     value={data[item.name]}
                     onChange={e => handleChange(item.name, e.target.value)}
-                    className="flex-1 border border-gray-300 rounded px-3 py-2"
+                    className="border border-gray-300 rounded px-3 py-2"
                   />
                 ) : item.type === 'readOnly' ? (
                   <input
@@ -80,10 +78,10 @@ export default function InputMask({ data, onChange, sections }) {
                     type="number"
                     readOnly
                     value={data[item.name]}
-                    className="flex-1 bg-gray-100 border border-gray-300 rounded px-3 py-2"
+                    className="bg-gray-100 border border-gray-300 rounded px-3 py-2"
                   />
                 ) : (
-                  <div className="flex-1">
+                  <div>
                     <input
                       id={item.name}
                       type="range"

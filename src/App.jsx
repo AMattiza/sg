@@ -143,6 +143,13 @@ export default function App() {
   const totalUnitsAll = chartData.reduce((sum, r) => sum + r.totalUnits, 0);
   const lastLicense1 = chartData[chartData.length - 1]?.tier1 || 0;
   const lastLicense2 = chartData[chartData.length - 1]?.tier2 || 0;
+  const totalSalesCost = chartData.reduce((sum, r) => sum + r.vertriebsKosten, 0);
+  const avgSalesCostPerMonth = totalSalesCost / months;
+  const lastSalesCost = chartData[chartData.length - 1]?.vertriebsKosten || 0;
+  const totalLogisticsCost = chartData.reduce((sum, r) => sum + r.logistikKosten, 0);
+  const avgLogisticsCostPerMonth = totalLogisticsCost / months;
+  const lastLogisticsCost = chartData[chartData.length - 1]?.logistikKosten || 0;
+
 
   // Export
   const handleExportAll = () => {
@@ -284,6 +291,41 @@ export default function App() {
     <div className="p-4 bg-gray-100 rounded-xl text-center">
       <h3 className="font-medium">Erlös Lizenz 2 (letzter Monat)</h3>
       <p className="mt-2 text-2xl font-semibold">{fmt(lastLicense2)}</p>
+      <p className="text-sm text-gray-500">Im letzten Monat der Planung</p>
+    </div>
+  </div>
+</CollapsibleSection>
+
+      <CollapsibleSection title="Kostenübersicht – Vertrieb & Logistik">
+  <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-6">
+    <div className="p-4 bg-gray-100 rounded-xl text-center">
+      <h3 className="font-medium">Gesamte Vertriebskosten</h3>
+      <p className="mt-2 text-2xl font-semibold">{fmt(totalSalesCost)}</p>
+      <p className="text-sm text-gray-500">Alle Vertriebskosten über {months} Monate</p>
+    </div>
+    <div className="p-4 bg-gray-100 rounded-xl text-center">
+      <h3 className="font-medium">Ø Vertriebskosten je Monat</h3>
+      <p className="mt-2 text-2xl font-semibold">{fmt(avgSalesCostPerMonth)}</p>
+      <p className="text-sm text-gray-500">Durchschnitt pro Monat</p>
+    </div>
+    <div className="p-4 bg-gray-100 rounded-xl text-center">
+      <h3 className="font-medium">Vertriebskosten (letzter Monat)</h3>
+      <p className="mt-2 text-2xl font-semibold">{fmt(lastSalesCost)}</p>
+      <p className="text-sm text-gray-500">Im letzten Monat der Planung</p>
+    </div>
+    <div className="p-4 bg-gray-100 rounded-xl text-center">
+      <h3 className="font-medium">Gesamte Logistikkosten</h3>
+      <p className="mt-2 text-2xl font-semibold">{fmt(totalLogisticsCost)}</p>
+      <p className="text-sm text-gray-500">Alle Logistikkosten über {months} Monate</p>
+    </div>
+    <div className="p-4 bg-gray-100 rounded-xl text-center">
+      <h3 className="font-medium">Ø Logistikkosten je Monat</h3>
+      <p className="mt-2 text-2xl font-semibold">{fmt(avgLogisticsCostPerMonth)}</p>
+      <p className="text-sm text-gray-500">Durchschnitt pro Monat</p>
+    </div>
+    <div className="p-4 bg-gray-100 rounded-xl text-center">
+      <h3 className="font-medium">Logistikkosten (letzter Monat)</h3>
+      <p className="mt-2 text-2xl font-semibold">{fmt(lastLogisticsCost)}</p>
       <p className="text-sm text-gray-500">Im letzten Monat der Planung</p>
     </div>
   </div>

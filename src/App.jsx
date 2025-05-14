@@ -149,7 +149,10 @@ export default function App() {
   const totalLogisticsCost = chartData.reduce((sum, r) => sum + r.logistikKosten, 0);
   const avgLogisticsCostPerMonth = totalLogisticsCost / months;
   const lastLogisticsCost = chartData[chartData.length - 1]?.logistikKosten || 0;
-
+  const lastMonthData = chartData[chartData.length - 1] || {};
+  const lastMonthNewCustomers = lastMonthData.newCustomers || 0;
+  const lastMonthRevenue = (lastMonthData.totalUnits || 0) * sellPrice;
+  const lastMonthUnits = lastMonthData.totalUnits || 0;
 
   // Export
   const handleExportAll = () => {
@@ -233,49 +236,64 @@ export default function App() {
       </CollapsibleSection>
 
       <CollapsibleSection title="Übersicht – Kundenzahlen">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="p-4 bg-gray-100 rounded-xl text-center">
-            <h3 className="font-medium">Gesamt Neukunden</h3>
-            <p className="mt-2 text-2xl font-semibold">{fmtNum(totalNew)}</p>
-            <p className="text-sm text-gray-500">Summe aller Neukunden im ersten Jahr</p>
-          </div>
-          <div className="p-4 bg-gray-100 rounded-xl text-center">
-            <h3 className="font-medium">Kunden mit ≥1 Nachbestellung</h3>
-            <p className="mt-2 text-2xl font-semibold">{fmtNum(reorders)}</p>
-            <p className="text-sm text-gray-500">Anzahl mit mind. einer Nachbestellung im ersten Jahr</p>
-          </div>
-        </div>
-      </CollapsibleSection>
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div className="p-4 bg-gray-100 rounded-xl text-center">
+      <h3 className="font-medium">Gesamt Neukunden</h3>
+      <p className="mt-2 text-2xl font-semibold">{fmtNum(totalNew)}</p>
+      <p className="text-sm text-gray-500">Summe aller Neukunden im ersten Jahr</p>
+    </div>
+    <div className="p-4 bg-gray-100 rounded-xl text-center">
+      <h3 className="font-medium">Kunden mit ≥1 Nachbestellung</h3>
+      <p className="mt-2 text-2xl font-semibold">{fmtNum(reorders)}</p>
+      <p className="text-sm text-gray-500">Anzahl mit mind. einer Nachbestellung im ersten Jahr</p>
+    </div>
+    <div className="p-4 bg-gray-100 rounded-xl text-center">
+      <h3 className="font-medium">Kunden gesamt (letzter Monat)</h3>
+      <p className="mt-2 text-2xl font-semibold">{fmtNum(lastMonthNewCustomers)}</p>
+      <p className="text-sm text-gray-500">Neue Kunden im letzten Monat der Planung</p>
+    </div>
+  </div>
+</CollapsibleSection>
 
       <CollapsibleSection title="Übersicht – Durchschnittswerte">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="p-4 bg-gray-100 rounded-xl text-center">
-            <h3 className="font-medium">Ø VE pro Händler/Jahr</h3>
-            <p className="mt-2 text-2xl font-semibold">{fmtNum(avgUnitsFirstYear)}</p>
-            <p className="text-sm text-gray-500">Durchschnitt VE pro Kunde im ersten Jahr</p>
-          </div>
-          <div className="p-4 bg-gray-100 rounded-xl text-center">
-            <h3 className="font-medium">Ø Umsatz pro Händler/Jahr</h3>
-            <p className="mt-2 text-2xl font-semibold">{fmt(avgRevenueFirstYear)}</p>
-            <p className="text-sm text-gray-500">Durchschnittlicher Umsatz pro Kunde im ersten Jahr</p>
-          </div>
-        </div>
-      </CollapsibleSection>
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div className="p-4 bg-gray-100 rounded-xl text-center">
+      <h3 className="font-medium">Ø VE pro Händler/Jahr</h3>
+      <p className="mt-2 text-2xl font-semibold">{fmtNum(avgUnitsFirstYear)}</p>
+      <p className="text-sm text-gray-500">Durchschnitt VE pro Kunde im ersten Jahr</p>
+    </div>
+    <div className="p-4 bg-gray-100 rounded-xl text-center">
+      <h3 className="font-medium">Ø Umsatz pro Händler/Jahr</h3>
+      <p className="mt-2 text-2xl font-semibold">{fmt(avgRevenueFirstYear)}</p>
+      <p className="text-sm text-gray-500">Durchschnittlicher Umsatz pro Kunde im ersten Jahr</p>
+    </div>
+    <div className="p-4 bg-gray-100 rounded-xl text-center">
+      <h3 className="font-medium">Umsatz gesamt (letzter Monat)</h3>
+      <p className="mt-2 text-2xl font-semibold">{fmt(lastMonthRevenue)}</p>
+      <p className="text-sm text-gray-500">Alle Einnahmen im letzten Monat</p>
+    </div>
+  </div>
+</CollapsibleSection>
 
       <CollapsibleSection title="Übersicht – Gesamt VE">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="p-4 bg-gray-100 rounded-xl text-center">
-            <h3 className="font-medium">VE insgesamt Ende Planungszeitraum</h3>
-            <p className="mt-2 text-2xl font-semibold">{fmtNum(totalUnitsAll)}</p>
-            <p className="text-sm text-gray-500">Summe aller VE über {months} Monate</p>
-          </div>
-          <div className="p-4 bg-gray-100 rounded-xl text-center">
-            <h3 className="font-medium">Ø VE pro Monat</h3>
-            <p className="mt-2 text-2xl font-semibold">{fmtNum(totalUnitsAll / months)}</p>
-            <p className="text-sm text-gray-500">Durchschnittliche VE je Monat</p>
-          </div>
-        </div>
-      </CollapsibleSection>
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div className="p-4 bg-gray-100 rounded-xl text-center">
+      <h3 className="font-medium">VE insgesamt Ende Planungszeitraum</h3>
+      <p className="mt-2 text-2xl font-semibold">{fmtNum(totalUnitsAll)}</p>
+      <p className="text-sm text-gray-500">Summe aller VE über {months} Monate</p>
+    </div>
+    <div className="p-4 bg-gray-100 rounded-xl text-center">
+      <h3 className="font-medium">Ø VE pro Monat</h3>
+      <p className="mt-2 text-2xl font-semibold">{fmtNum(totalUnitsAll / months)}</p>
+      <p className="text-sm text-gray-500">Durchschnittliche VE je Monat</p>
+    </div>
+    <div className="p-4 bg-gray-100 rounded-xl text-center">
+      <h3 className="font-medium">VE gesamt (letzter Monat)</h3>
+      <p className="mt-2 text-2xl font-semibold">{fmtNum(lastMonthUnits)}</p>
+      <p className="text-sm text-gray-500">Alle VE im letzten Monat</p>
+    </div>
+  </div>
+</CollapsibleSection>
       
       <CollapsibleSection title="Kostenübersicht – Vertrieb & Logistik">
   <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-6">

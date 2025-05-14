@@ -76,6 +76,23 @@ export default function App() {
 
   // 1) Chart-Daten
   const chartData = newPartnersPerMonth.map((cSize, i) => {
+    const lastMonthIndex = months - 1;
+let activeCustomersInLastMonth = 0;
+
+for (let cohort = 0; cohort <= lastMonthIndex; cohort++) {
+  const age = lastMonthIndex - cohort;
+
+  // Hat Nachbestell-Zyklen?
+  let isActive = age === 0; // im Startmonat auf jeden Fall aktiv
+  if (!isActive && reorderCycle > 0 && age >= reorderCycle && age % reorderCycle === 0) {
+    isActive = true;
+  }
+
+  if (isActive) {
+    activeCustomersInLastMonth += newPartnersPerMonth[cohort];
+  }
+}
+
     const yyyy = startYear + Math.floor((startMonth - 1 + i) / 12);
     const mm = ((startMonth - 1 + i) % 12) + 1;
     const monthLabel = `${String(mm).padStart(2, '0')}/${yyyy}`;
@@ -265,7 +282,7 @@ const reorders = reorderCustomersSet.size;
     </div>
     <div className="p-4 bg-gray-100 rounded-xl text-center">
       <h3 className="font-medium">Kunden gesamt (letzter Monat)</h3>
-      <p className="mt-2 text-2xl font-semibold">{fmtNum(lastMonthNewCustomers)}</p>
+     <p className="mt-2 text-2xl font-semibold">{fmtNum(activeCustomersInLastMonth)}</p>
       <p className="text-sm text-gray-500">Neue Kunden im letzten Monat der Planung</p>
     </div>
   </div>

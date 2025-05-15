@@ -23,19 +23,19 @@ export default function App() {
     startDate: '2025-07',
     costPrice: 6.9,
     sellPrice: 12.9,
-    salesCost: 0,
-    logisticsCost: 0,
+    salesCost: 1.5,
+    logisticsCost: 0.5,
     unitsPerDisplay: 32,
     newPartners: 4,
     increaseInterval: 12,
     increaseAmount: 2,
-    reorderRate: 50,
-    reorderCycle: 1,
-    license1Gross: 1.2,
+    reorderRate: 75,
+    reorderCycle: 3,
+    license1Gross: 1.4,
     postcardCost: 0.1,
-    graphicShare: 0.2,
-    license2: 1.3,
-    license2Threshold: 3,
+    graphicShare: 0.3,
+    license2: 1,
+    license2Threshold: 10,
     marginPerUnit: 0,
     deckungsbeitragPerUnit: 0
   });
@@ -255,7 +255,7 @@ const reorders = reorderCustomersSet.size;
         <InputMask data={data} onChange={setData} sections={['Kostenplanung (Pina)']} />
       </CollapsibleSection>
 
-      <CollapsibleSection title="Lizenz 1 / Städteserie & Lizenz 2 / Website & Shop">
+      <CollapsibleSection title="Lizenz 1 & Lizenz 2">
         <InputMask
           data={data}
           onChange={setData}
@@ -271,7 +271,7 @@ const reorders = reorderCustomersSet.size;
     <div className="p-4 bg-gray-100 rounded-xl text-center">
       <h3 className="font-medium">Gesamt Neukunden</h3>
       <p className="mt-2 text-2xl font-semibold">{fmtNum(totalNew)}</p>
-      <p className="text-sm text-gray-500">Summe aller Neukunden im ersten Jahr</p>
+      <p className="text-sm text-gray-500">Summe aller Neukunden</p>
     </div>
     <div className="p-4 bg-gray-100 rounded-xl text-center">
      <h3 className="font-medium">Kunden mit ≥1 Nachbestellung</h3>
@@ -280,7 +280,7 @@ const reorders = reorderCustomersSet.size;
     <div className="p-4 bg-gray-100 rounded-xl text-center">
       <h3 className="font-medium">Kunden gesamt (letzter Monat)</h3>
      <p className="mt-2 text-2xl font-semibold">{fmtNum(activeCustomersInLastMonth)}</p>
-      <p className="text-sm text-gray-500">Neue Kunden im letzten Monat der Planung</p>
+      <p className="text-sm text-gray-500">Kunden im letzten Monat der Planung</p>
     </div>
   </div>
 </CollapsibleSection>
